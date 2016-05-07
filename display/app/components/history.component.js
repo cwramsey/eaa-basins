@@ -49,8 +49,10 @@ angular.module('app').component('historyComponent', {
 
             const ui = H.ui.UI.createDefault(map, defaults);
 
+            const bounds = new H.map.Overlay(new H.geo.Rect(30.785718, -100.558504, 28.990952, -96.976527), '/display/images/map_gc.png');
+            map.addObject(bounds);
+
             for (let photo of photos) {
-                console.log(photo);
 
                 if (!photo.color) {
                     continue;
@@ -68,10 +70,10 @@ angular.module('app').component('historyComponent', {
                         break;
                     default:
                         continue;
-                }                
+                }
 
                 const this_icon = icon.replace("{}", photo.color);
-                
+
                 const place = new H.map.Icon(this_icon);
                 const coords = {
                     lat: photo.lat,
