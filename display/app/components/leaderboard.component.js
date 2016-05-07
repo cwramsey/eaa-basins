@@ -2,7 +2,7 @@ angular.module('app').component('leaderboardComponent', {
     template: `
         <ul class="collection">
             <li class="collection-item avatar" ng-repeat="user in $ctrl.users">
-                <img src="/images/profile_{{user.img}}.png" alt="" class="circle">
+                <img src="/display/images/profile_{{user.img}}.png" alt="" class="circle">
                 <span class="title">{{user.name}}</span>
                 <p>Hero Points: <span class="red-text">{{user.score}}</span> <br />
                 Badges: {{user.badges}}
