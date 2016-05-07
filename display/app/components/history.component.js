@@ -9,7 +9,10 @@ angular.module('app').component('historyComponent', {
         this.show = () => { };
         this.chosen_items = [];
 
-        const icon = `/display/images/Pin.png`;
+        const icon = `<svg width="12" height="12" 
+                        xmlns="http://www.w3.org/2000/svg">
+                        <rect stroke="white" fill="{}" x="1" y="1" width="22" 
+                        height="22" /></svg>`;
 
         $scope.$on('close:item', () => {
             this.chosen_items = [];
@@ -47,10 +50,29 @@ angular.module('app').component('historyComponent', {
             const ui = H.ui.UI.createDefault(map, defaults);
 
             for (let photo of photos) {
+                console.log(photo);
 
-                console.log(photo.approved);
+                if (!photo.color) {
+                    continue;
+                }
+
+                switch (photo.color) {
+                    case "orange":
+                        photo.color = "#ff6600";
+                        break;
+                    case "red":
+                        photo.color = "#ef3123";
+                        break;
+                    case "green":
+                        photo.color = "#009933";
+                        break;
+                    default:
+                        continue;
+                }                
+
+                const this_icon = icon.replace("{}", photo.color);
                 
-                const place = new H.map.Icon(icon);
+                const place = new H.map.Icon(this_icon);
                 const coords = {
                     lat: photo.lat,
                     lng: photo.lon
@@ -67,13 +89,6 @@ angular.module('app').component('historyComponent', {
 
                 this.showMarker(items);
             });
-
-            map.addObject(new H.map.Marker({
-                lat: 29.4241,
-                lng: -98.4936
-            }, {
-                    icon: new H.map.Icon(icon)
-                }));
         };
 
         this.showMarker = (items) => {
