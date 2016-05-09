@@ -53,25 +53,7 @@ angular.module('app').component('historyComponent', {
             map.addObject(bounds);
 
             for (let photo of photos) {
-
-                if (!photo.color) {
-                    continue;
-                }
-
-                switch (photo.color) {
-                    case "orange":
-                        photo.color = "#ff6600";
-                        break;
-                    case "red":
-                        photo.color = "#ef3123";
-                        break;
-                    case "green":
-                        photo.color = "#009933";
-                        break;
-                    default:
-                        continue;
-                }
-
+                
                 const this_icon = icon.replace("{}", photo.color);
 
                 const place = new H.map.Icon(this_icon);
